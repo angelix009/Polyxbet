@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #3b82f6;
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-primary\/80 {
+  background-color: rgb(59 130 246 / 0.8);
+}
+
+.hover\:bg-primary\/80:hover {
+  background-color: rgb(59 130 246 / 0.8);
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.from-primary {
+  --tw-gradient-from: var(--primary);
+  --tw-gradient-to: rgb(59 130 246 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.hover\:text-primary:hover {
+  color: var(--primary);
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
