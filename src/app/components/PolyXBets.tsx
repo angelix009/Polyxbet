@@ -4,9 +4,16 @@ import React, { useState, useEffect, useContext, createContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ResponsiveContainer, AreaChart, Area, Tooltip, XAxis, YAxis } from "recharts";
 import { ShieldCheck, Percent, Twitter, Activity, ArrowRight, TrendingUp, Users, DollarSign, Sparkles, Zap } from "lucide-react";
+import Image from "next/image";
 
 // UI Components
-function Card({ children, className = "", variant = "default" }: any) {
+interface CardProps {
+  children: React.ReactNode;
+  className?: string;
+  variant?: "default" | "premium" | "glass";
+}
+
+function Card({ children, className = "", variant = "default" }: CardProps) {
   const variants = {
     default: "bg-gradient-to-br from-neutral-900/80 to-neutral-800/60 border-neutral-700/50 shadow-2xl hover:shadow-blue-500/10",
     premium: "bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-500/30 shadow-2xl shadow-blue-500/20",
@@ -15,7 +22,15 @@ function Card({ children, className = "", variant = "default" }: any) {
   return <div className={`rounded-3xl backdrop-blur-xl border transition-all duration-500 hover:scale-[1.02] ${variants[variant]} ${className}`}>{children}</div>;
 }
 
-function Button({ children, variant = "primary", size = "md", className = "", ...props }: any) {
+interface ButtonProps {
+  children: React.ReactNode;
+  variant?: "primary" | "glass" | "premium";
+  size?: "sm" | "md" | "lg" | "xl";
+  className?: string;
+  onClick?: () => void;
+}
+
+function Button({ children, variant = "primary", size = "md", className = "", ...props }: ButtonProps) {
   const variants = {
     primary: "bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 hover:from-blue-500 hover:via-cyan-500 hover:to-blue-600 text-white shadow-xl shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-105",
     glass: "bg-white/10 backdrop-blur-xl border border-white/20 text-white hover:bg-white/20 shadow-xl",
@@ -149,7 +164,7 @@ function NavBar() {
     >
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <motion.a href="#hero" className="flex items-center gap-3 group" whileHover={{ scale: 1.05 }}>
-          <img src={logos.Combined} alt="logo" className="w-8 h-8 drop-shadow-lg" />
+          <Image src={logos.Combined} alt="logo" width={32} height={32} className="drop-shadow-lg" />
           <span className="font-black text-xl bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">PolyXBets</span>
         </motion.a>
         
@@ -208,7 +223,12 @@ function Hero() {
 const genSeries = (b: number) => Array.from({ length: 15 }, (_, i) => ({ t: i, p: Math.max(5, Math.min(95, b += Math.round((Math.random() - 0.5) * 6))) }));
 const chartData = [genSeries(32), genSeries(68), genSeries(25)];
 
-function MiniChart({ data, color = "#3b82f6" }: any) {
+interface MiniChartProps {
+  data: { t: number; p: number }[];
+  color?: string;
+}
+
+function MiniChart({ data, color = "#3b82f6" }: MiniChartProps) {
   return (
     <ResponsiveContainer width="100%" height={120}>
       <AreaChart data={data}>
@@ -381,7 +401,7 @@ function CTA() {
         </motion.h3>
         
         <motion.p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed font-medium" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          Join thousands of forward-thinking traders using PolyXBets to predict and profit from tomorrow's events.
+          Join thousands of forward-thinking traders using PolyXBets to predict and profit from tomorrow&apos;s events.
         </motion.p>
         
         <motion.div className="flex flex-col sm:flex-row gap-6 justify-center items-center" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -402,7 +422,7 @@ function Footer() {
     <footer className="bg-black border-t border-gray-800/50 py-16 px-6">
       <div className="max-w-7xl mx-auto text-center">
         <div className="flex items-center justify-center gap-3 mb-6">
-          <img src={logos.Combined} alt="logo" className="w-10 h-10" />
+          <Image src={logos.Combined} alt="logo" width={40} height={40} />
           <span className="font-black text-2xl bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">PolyXBets</span>
         </div>
         <p className="text-gray-500 text-sm">© {new Date().getFullYear()} PolyXBets. All rights reserved. Built with ❤️ for traders.</p>
